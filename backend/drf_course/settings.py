@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from dotenv import load_dotenv
+import datetime
+
 import os
 load_dotenv()
 
@@ -44,9 +46,11 @@ INSTALLED_APPS = [
     'django_extensions',#basically used to access abstarct model
     'django_filters',#used with django rest framework
     'rest_framework',#DRF package
-    'rest_framework.authtoken',
+   # 'rest_framework.authtoken',
+
     'core',
-    'ecommerce',#new app,
+    'ecommerce',
+    'users',#new app,
     
 
 ]
@@ -112,6 +116,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
+}
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -138,9 +146,11 @@ REST_FRAMEWORK = {
    'EXCEPTION_HANDLER': 'rest_framework_json_api.exceptions.exception_handler',
     'DEFAULT_PARSER_CLASSES': (
         'rest_framework_json_api.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser'
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework_json_api.renderers.JSONRenderer',
@@ -159,3 +169,7 @@ REST_FRAMEWORK = {
     ),
     'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json'
 }
+
+AUTH_PROFILE_MODULE = 'users.MyUser'
+
+AUTH_USER_MODEL = 'users.MyUser'

@@ -3,14 +3,14 @@ from django.db import models
 # Create your models here.
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from utils.model_abstracts import Model
 
 from django_extensions.db.models import (
     TimeStampedModel,ActivatorModel,TitleDescriptionModel
 
 )
-
+User = settings.AUTH_USER_MODEL
 class Item(
     TimeStampedModel,
     ActivatorModel,

@@ -19,6 +19,8 @@ from rest_framework import routers
 from core import views as core_views
 from rest_framework.authtoken.views import obtain_auth_token
 from ecommerce import views as ecommerce_views
+from users import views as user_view
+from rest_framework_simplejwt import views as jwt_views
 
 router=routers.DefaultRouter()
 
@@ -30,6 +32,12 @@ urlpatterns=router.urls
 urlpatterns += [
     path('admin/', admin.site.urls),
     path('contact/', core_views.ContactAPIView.as_view()),
-    path('api-token-auth/',obtain_auth_token),#gives access to auth token,
+    # path('api-token-auth/',obtain_auth_token),#gives access to auth token,
+    path('accounts/register',user_view. RegistrationView.as_view(), name='register'),
+    path('accounts/login', user_view.LoginView.as_view(), name='register'),
+    path('accounts/logout', user_view.LogoutView.as_view(), name='register'),
+    path('accounts/change-password', user_view.ChangePasswordView.as_view(), name='register'),
+    path('accounts/token-refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+
  
 ]
