@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'core',
     'ecommerce',
     'users',#new app,
+    'blog'#new app
     
 
 ]

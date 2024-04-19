@@ -21,11 +21,13 @@ from rest_framework.authtoken.views import obtain_auth_token
 from ecommerce import views as ecommerce_views
 from users import views as user_view
 from rest_framework_simplejwt import views as jwt_views
+from blog import views as blog_view
 
 router=routers.DefaultRouter()
 
 router.register(r'item', ecommerce_views.ItemViewSet, basename='item')
 router.register(r'order', ecommerce_views.OrderViewSet, basename='order')
+router.register(r'blogposts',blog_view.BlogPostViewSet, basename='blogposts')
 
 urlpatterns=router.urls
 
